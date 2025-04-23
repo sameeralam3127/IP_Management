@@ -1,0 +1,11 @@
+2025-04-24 00:30:04,155 - INFO - Reading input file: ip_list.xlsx
+2025-04-24 00:30:04,187 - INFO - Pinging 5 IPs (timeout: 2s, count: 1, retries: 1)
+2025-04-24 00:30:05,204 - INFO - Resolving hostnames...
+2025-04-24 00:30:05,236 - INFO - Saved results to ping_results.xlsx
+2025-04-24 00:32:38,375 - INFO - Reading input file: network_devices.xlsx
+2025-04-24 00:32:38,403 - ERROR - Input file not found: network_devices.xlsx
+2025-04-24 00:37:06,278 - INFO - Reading input file: ip_list.xlsx
+2025-04-24 00:37:06,325 - INFO - Pinging 5 IPs (timeout: 3s, count: 2, retries: 2)
+2025-04-24 00:37:10,373 - INFO - Resolving hostnames...
+2025-04-24 00:37:10,430 - INFO - Saved results to scan_results.xlsx
+2025-04-24 00:37:10,431 - INFO - Saved results to scan_results.csv
