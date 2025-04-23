@@ -78,14 +78,9 @@ ip-pinger/
 └── ping_results.xlsx  # Sample output file
 ```
 
-Sure! Here's a detailed description of **all the functions** from your script written in a clean, professional tone — perfect for a `README.md` or documentation page.
-
----
 
 ## 🔧 **Functions Overview**
 
-
----
 
 ### `parse_args() -> argparse.Namespace`
 Parses command-line arguments using Python's `argparse` module.  
