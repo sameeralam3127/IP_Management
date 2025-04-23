@@ -78,34 +78,118 @@ ip-pinger/
 └── ping_results.xlsx  # Sample output file
 ```
 
-## 🔧 Functions Reference
+Sure! Here's a detailed description of **all the functions** from your script written in a clean, professional tone — perfect for a `README.md` or documentation page.
 
-### `ping_ip(ip, timeout=2, count=1)`
-- Performs a single ping operation
-- Returns: (status, latency) tuple
-- Handles platform-specific ping commands
+---
 
-### `ping_with_retry(ip, timeout=2, count=1, retries=1)`
-- Implements retry logic for unreliable connections
-- Returns best available status from multiple attempts
+## 🔧 **Functions Overview**
 
-### `ping_ips_parallel(ip_list, timeout=2, count=1, retries=1, max_workers=50)`
-- Parallel ping execution using ThreadPoolExecutor
-- Includes progress bar visualization
 
-### `resolve_hostname(ip)`
-- Performs reverse DNS lookup
-- Handles various resolution error cases
+---
 
-### `generate_report(df)`
-- Creates comprehensive summary statistics
-- Displays colored output to console
-- Calculates success rate metrics
+### `parse_args() -> argparse.Namespace`
+Parses command-line arguments using Python's `argparse` module.  
+Allows the user to configure:
+- Input file path
+- Output file name and formats
+- Ping timeout, count, and retries
+- Maximum number of concurrent threads  
+Returns an `argparse.Namespace` object with the parsed options.
 
-### `save_results(df, filename, formats)`
-- Exports results to multiple formats
-- Supports concurrent file writing
-- Handles write errors gracefully
+---
+
+### `validate_ip(ip: str) -> bool`
+Checks whether the given IP address is valid.  
+Uses Python’s `ipaddress` module to verify format correctness.  
+Returns `True` if valid, otherwise `False`.
+
+---
+
+### `parse_latency(ping_output: str) -> Union[float, None]`
+Extracts the average ping latency from the raw ping output string.  
+Handles both Windows and Linux/Unix ping output formats using regular expressions.  
+Returns:
+- `float` value representing latency in milliseconds, or  
+- `None` if latency couldn't be determined.
+
+---
+
+### `ping_ip(ip: str, timeout: int = 2, count: int = 1) -> Tuple[str, Union[float, None]]`
+Executes a single ping operation to the given IP address.  
+Automatically adjusts ping command based on the operating system.  
+Parses response to determine status and latency.
+
+Returns a tuple:
+- `status`: A string like `"Active"`, `"Timeout"`, `"Unreachable"`, `"Unknown Host"`, or error.
+- `latency`: Ping response time in ms, or `None` if not available.
+
+---
+
+### `ping_with_retry(ip: str, timeout: int = 2, count: int = 1, retries: int = 1) -> Tuple[str, Union[float, None]]`
+Adds retry logic around the `ping_ip()` function.  
+Attempts to ping an IP multiple times if initial attempts fail.  
+Returns the first `"Active"` result found, or the final failed result after retries.
+
+---
+
+### `resolve_hostname(ip: str) -> str`
+Attempts to resolve the hostname associated with the given IP address using reverse DNS lookup (`socket.gethostbyaddr`).  
+Handles errors gracefully.
+
+Returns:
+- Hostname as a string if successful,
+- `"Unresolvable"` if it can't be resolved,
+- `"Error resolving"` for unexpected errors.
+
+---
+
+### `ping_ips_parallel(ip_list: List[str], timeout: int, count: int, retries: int, max_workers: int) -> Dict[str, Tuple[str, Union[float, None]]]`
+Executes ping operations for a list of IPs in parallel using a thread pool.  
+Improves efficiency by using `concurrent.futures.ThreadPoolExecutor`.  
+Displays a real-time progress bar via `tqdm`.
+
+Returns:
+- A dictionary mapping each IP to a tuple `(status, latency)`.
+
+---
+
+### `save_results(df: pd.DataFrame, filename: str, formats: List[str]) -> None`
+Saves the result DataFrame to one or more file formats:
+- Excel (`.xlsx`)
+- CSV (`.csv`)
+- JSON (`.json`)
+
+Handles file write operations safely and logs success or failure.
+
+---
+
+### `generate_report(df: pd.DataFrame) -> None`
+Generates a colorful summary report of ping statistics.  
+Uses `colorama` to highlight output in the terminal.  
+Displays:
+- Total IPs processed
+- Count of each status (Active, Inactive, Timeout, etc.)
+- Average latency for active IPs
+- Count of unresolvable hostnames
+- Overall success rate as a percentage
+
+---
+
+### `main()`
+The primary driver of the script. It:
+1. Parses command-line arguments
+2. Reads the input Excel file
+3. Validates IPs
+4. Performs parallel ping operations
+5. Resolves hostnames
+6. Updates the DataFrame
+7. Saves results
+8. Prints a summary report
+
+Includes robust exception handling for common errors (missing files, bad IPs, etc.).
+
+---
+
 
 ## 📋 Input File Format
 
