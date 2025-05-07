@@ -186,7 +186,7 @@ Includes robust exception handling for common errors (missing files, bad IPs, et
 ---
 
 
-## 📋 Input File Format
+##  Input File Format
 
 Create an Excel file (`ip_list.xlsx` by default) with:
 
@@ -196,7 +196,7 @@ Create an Excel file (`ip_list.xlsx` by default) with:
 | 10.0.0.1    |
 | ...         |
 
-## 📈 Output File Contents
+## Output File Contents
 
 The output file will contain:
 
@@ -222,7 +222,7 @@ The output file will contain:
 
 View detailed logs in `ip_pinger.log` for debugging.
 
-## 📜 License
+##  License
 
 MIT License - Free for commercial and personal use
 
