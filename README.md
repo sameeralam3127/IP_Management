@@ -3,7 +3,7 @@
 ![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-## 📝 Overview
+##  Overview
 
 The IP Pinger Tool is a robust Python application designed for network administrators and IT professionals to efficiently monitor network devices. It provides parallel ping operations, hostname resolution, and comprehensive reporting capabilities.
 
@@ -17,7 +17,7 @@ The IP Pinger Tool is a robust Python application designed for network administr
 - **Colorful Console Output**: Easy-to-read status information
 - **Comprehensive Logging**: Detailed operation logs for debugging
 
-## 📦 Installation
+## Installation
 
 1. Clone the repository:
 ```bash
@@ -30,7 +30,7 @@ cd IP_Management
 pip install -r requirements.txt
 ```
 
-## 🚀 Usage
+## Usage
 
 ### Basic Command
 ```bash
@@ -53,7 +53,7 @@ Example:
 python ip_pinger.py --input network_devices.xlsx --output scan_results --timeout 3 --count 2 --retries 2 --threads 100 --formats xlsx csv
 ```
 
-## 📊 Sample Report Output
+## Sample Report Output
 
 ```
 === Ping Results Summary ===
@@ -67,7 +67,7 @@ Unresolvable Hosts: 8
 Success Rate: 88.00%
 ```
 
-## 📂 File Structure
+## File Structure
 
 ```
 ip-pinger/
@@ -79,7 +79,7 @@ ip-pinger/
 ```
 
 
-## 🔧 **Functions Overview**
+##  **Functions Overview**
 
 
 ### `parse_args() -> argparse.Namespace`
@@ -206,7 +206,7 @@ The output file will contain:
 | 10.0.0.1    | Timeout   | -       | Unresolvable    |
 | ...         | ...       | ...     | ...             |
 
-## 🛠 Troubleshooting
+##  Troubleshooting
 
 1. **Permission Errors**:
    - Ensure write permissions in output directory
