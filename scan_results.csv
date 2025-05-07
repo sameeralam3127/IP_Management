@@ -1,6 +1,0 @@
-IP Address,Status,Latency,Hostname
-8.8.8.8,Active,9.23,dns.google
-1.1.1.1,Active,4.028,one.one.one.one
-192.0.2.1,Inactive,,Unresolvable
-203.0.113.5,Inactive,,Unresolvable
-198.51.100.23,Inactive,,Unresolvable
