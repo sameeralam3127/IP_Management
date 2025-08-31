@@ -9,46 +9,82 @@
       rel="stylesheet"
     />
     <style>
-      body {
-        font-family: "Roboto", sans-serif;
+      * {
         margin: 0;
         padding: 0;
-        background-color: #f7f7f7;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f4f7fa;
         color: #333;
+        line-height: 1.6;
       }
       header {
-        background-color: #1f2937;
+        background: linear-gradient(135deg, #1f2937, #3b82f6);
         color: #fff;
-        padding: 2rem;
+        padding: 3rem 1rem;
         text-align: center;
       }
       header h1 {
-        margin: 0;
-        font-size: 2.2rem;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
       }
       header p {
-        font-size: 1.1rem;
-        margin-top: 0.5rem;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+      .badges img {
+        margin-right: 0.5rem;
+        vertical-align: middle;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        background: #fff;
+        padding: 0.8rem 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+      nav a {
+        margin-right: 1rem;
+        text-decoration: none;
+        color: #3b82f6;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      nav a:hover {
+        color: #1f2937;
       }
       main {
-        max-width: 900px;
+        max-width: 1000px;
         margin: 2rem auto;
         padding: 0 1rem;
       }
       h2 {
+        margin-top: 2rem;
+        margin-bottom: 1rem;
         color: #1f2937;
         border-bottom: 2px solid #e5e7eb;
         padding-bottom: 0.3rem;
-        margin-top: 2rem;
+      }
+      p {
+        margin-bottom: 1rem;
+      }
+      ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
       }
       pre {
-        background-color: #e5e7eb;
+        background-color: #1e293b;
+        color: #f8fafc;
         padding: 1rem;
         overflow-x: auto;
+        border-radius: 6px;
+        margin-bottom: 1rem;
       }
       code {
         font-family: monospace;
-        color: #1f2937;
       }
       table {
         width: 100%;
@@ -57,21 +93,62 @@
       }
       th,
       td {
-        padding: 0.7rem;
+        padding: 0.8rem;
         border: 1px solid #ddd;
         text-align: left;
       }
       th {
-        background-color: #f3f4f6;
+        background-color: #3b82f6;
+        color: #fff;
       }
-      .badge {
-        display: inline-block;
-        margin-right: 0.5rem;
+      .card {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1rem;
+      }
+      .collapsible {
+        background-color: #3b82f6;
+        color: white;
+        cursor: pointer;
+        padding: 0.8rem 1rem;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1rem;
+        border-radius: 6px;
+        margin-bottom: 0.5rem;
+      }
+      .collapsible:after {
+        content: "\002B";
+        float: right;
+      }
+      .collapsible.active:after {
+        content: "\2212";
+      }
+      .content {
+        padding: 0 1rem;
+        display: none;
+        overflow: hidden;
+        background-color: #f9fafb;
+        border-radius: 0 0 6px 6px;
+        margin-bottom: 1rem;
       }
       footer {
         text-align: center;
         padding: 2rem;
         color: #777;
+        border-top: 1px solid #e5e7eb;
+        margin-top: 3rem;
+      }
+      a {
+        color: #3b82f6;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>
@@ -79,97 +156,125 @@
     <header>
       <h1>IP Pinger Tool</h1>
       <p>Advanced Network Monitoring & Reporting Tool for IT Professionals</p>
-      <div>
+      <div class="badges">
         <img
           src="https://img.shields.io/badge/python-3.6%2B-blue"
-          class="badge"
           alt="Python Version"
         />
         <img
           src="https://img.shields.io/badge/license-MIT-green"
-          class="badge"
           alt="License"
         />
       </div>
-    </header>
-    <main>
-      <h2>Overview</h2>
-      <p>
-        The IP Pinger Tool is a robust Python application designed for network
-        administrators and IT professionals to efficiently monitor network
-        devices. It provides parallel ping operations, hostname resolution, and
-        comprehensive reporting capabilities.
+      <p style="margin-top: 0.5rem; font-style: italic">
+        macOS GUI (.dmg) version in development and testing
       </p>
+    </header>
 
-      <h2>Features ✨</h2>
-      <ul>
-        <li>Parallel Processing: Ping hundreds of IPs simultaneously</li>
-        <li>Detailed Reporting: Get latency metrics and status reports</li>
-        <li>Multiple Output Formats: Export results in Excel, CSV, or JSON</li>
-        <li>
-          Smart Retry Mechanism: Configurable retries for flaky connections
-        </li>
-        <li>Hostname Resolution: Automatically resolves hostnames</li>
-        <li>Colorful Console Output: Easy-to-read status information</li>
-        <li>Comprehensive Logging: Detailed operation logs for debugging</li>
-      </ul>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#features">Features</a>
+      <a href="#installation">Installation</a>
+      <a href="#usage">Usage</a>
+      <a href="#functions">Functions</a>
+      <a href="#macos-gui">macOS GUI</a>
+      <a href="#contact">Contact</a>
+    </nav>
 
-      <h2>Installation</h2>
-      <pre><code>git clone https://github.com/sameeralam3127/IP_Management.git
+    <main>
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The IP Pinger Tool is a robust Python application designed for network
+          administrators and IT professionals to efficiently monitor network
+          devices. It provides parallel ping operations, hostname resolution,
+          and comprehensive reporting capabilities.
+        </p>
+      </section>
+
+      <section id="features">
+        <h2>Features ✨</h2>
+        <ul>
+          <li>Parallel Processing: Ping hundreds of IPs simultaneously</li>
+          <li>Detailed Reporting: Get latency metrics and status reports</li>
+          <li>
+            Multiple Output Formats: Export results in Excel, CSV, or JSON
+          </li>
+          <li>
+            Smart Retry Mechanism: Configurable retries for flaky connections
+          </li>
+          <li>Hostname Resolution: Automatically resolves hostnames</li>
+          <li>Colorful Console Output: Easy-to-read status information</li>
+          <li>Comprehensive Logging: Detailed operation logs for debugging</li>
+        </ul>
+      </section>
+
+      <section id="installation">
+        <h2>Installation</h2>
+        <div class="card">
+          <pre><code>git clone https://github.com/sameeralam3127/IP_Management.git
 cd IP_Management
 pip install -r requirements.txt</code></pre>
+        </div>
+      </section>
 
-      <h2>Usage</h2>
-      <h3>Basic Command</h3>
-      <pre><code>python ip_pinger.py</code></pre>
+      <section id="usage">
+        <h2>Usage</h2>
+        <button class="collapsible">Basic Command</button>
+        <div class="content">
+          <pre><code>python ip_pinger.py</code></pre>
+        </div>
 
-      <h3>Advanced Options</h3>
-      <table>
-        <tr>
-          <th>Parameter</th>
-          <th>Description</th>
-          <th>Default</th>
-        </tr>
-        <tr>
-          <td>--input</td>
-          <td>Input Excel file path</td>
-          <td>ip_list.xlsx</td>
-        </tr>
-        <tr>
-          <td>--output</td>
-          <td>Output file base name</td>
-          <td>ping_results</td>
-        </tr>
-        <tr>
-          <td>--timeout</td>
-          <td>Ping timeout in seconds</td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td>--count</td>
-          <td>Number of ping packets</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>--retries</td>
-          <td>Number of ping retries</td>
-          <td>1</td>
-        </tr>
-        <tr>
-          <td>--threads</td>
-          <td>Max concurrent threads</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>--formats</td>
-          <td>Output formats (xlsx,csv,json)</td>
-          <td>xlsx</td>
-        </tr>
-      </table>
-      <pre><code>python ip_pinger.py --input network_devices.xlsx --output scan_results --timeout 3 --count 2 --retries 2 --threads 100 --formats xlsx csv</code></pre>
+        <button class="collapsible">Advanced Options</button>
+        <div class="content">
+          <table>
+            <tr>
+              <th>Parameter</th>
+              <th>Description</th>
+              <th>Default</th>
+            </tr>
+            <tr>
+              <td>--input</td>
+              <td>Input Excel file path</td>
+              <td>ip_list.xlsx</td>
+            </tr>
+            <tr>
+              <td>--output</td>
+              <td>Output file base name</td>
+              <td>ping_results</td>
+            </tr>
+            <tr>
+              <td>--timeout</td>
+              <td>Ping timeout in seconds</td>
+              <td>2</td>
+            </tr>
+            <tr>
+              <td>--count</td>
+              <td>Number of ping packets</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>--retries</td>
+              <td>Number of ping retries</td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td>--threads</td>
+              <td>Max concurrent threads</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>--formats</td>
+              <td>Output formats (xlsx,csv,json)</td>
+              <td>xlsx</td>
+            </tr>
+          </table>
+          <pre><code>python ip_pinger.py --input network_devices.xlsx --output scan_results --timeout 3 --count 2 --retries 2 --threads 100 --formats xlsx csv</code></pre>
+        </div>
 
-      <h2>Sample Report Output</h2>
-      <pre><code>=== Ping Results Summary ===
+        <button class="collapsible">Sample Report Output</button>
+        <div class="content">
+          <pre><code>=== Ping Results Summary ===
 Total IPs: 150
 Active: 132
 Inactive: 12
@@ -178,20 +283,60 @@ Timeouts: 2
 Avg Latency (ms): 24.57
 Unresolvable Hosts: 8
 Success Rate: 88.00%</code></pre>
+        </div>
+      </section>
 
-      <h2>License</h2>
-      <p>MIT License - Free for commercial and personal use</p>
+      <section id="functions">
+        <h2>Functions Overview</h2>
+        <p>
+          The tool contains modular Python functions for argument parsing,
+          pinging, hostname resolution, retries, and reporting. Each function is
+          documented in the README and handles robust error checking.
+        </p>
+        <p>
+          The macOS Swift GUI will eventually call these functions under the
+          hood.
+        </p>
+      </section>
 
-      <h2>Contact</h2>
-      <p>
-        For support or feature requests, please open a GitHub issue on
-        <a
-          href="https://github.com/sameeralam3127/IP_Management"
-          target="_blank"
-          >the repository</a
-        >.
-      </p>
+      <section id="macos-gui">
+        <h2>macOS GUI (.dmg)</h2>
+        <p>
+          The full-featured native macOS GUI is currently under development and
+          testing. Once ready, it will replicate the functionality of this
+          Python tool and provide a user-friendly interface.
+        </p>
+        <div class="card">
+          <p><em>Download link for the .dmg installer coming soon...</em></p>
+        </div>
+      </section>
+
+      <section id="contact">
+        <h2>Contact</h2>
+        <p>
+          For support or feature requests, open a GitHub issue on
+          <a
+            href="https://github.com/sameeralam3127/IP_Management"
+            target="_blank"
+            >the repository</a
+          >.
+        </p>
+        <p>MIT License - Free for commercial and personal use</p>
+      </section>
     </main>
-    <footer>&copy; 2024 IP Pinger Tool</footer>
+
+    <footer>&copy; 2025 IP Pinger Tool | Made with ❤️</footer>
+
+    <script>
+      const collapsibles = document.querySelectorAll(".collapsible");
+      collapsibles.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          this.classList.toggle("active");
+          const content = this.nextElementSibling;
+          content.style.display =
+            content.style.display === "block" ? "none" : "block";
+        });
+      });
+    </script>
   </body>
 </html>
