@@ -233,7 +233,7 @@ Free for both personal and commercial use. Attribution appreciated.
 
 ---
 
-## 🧪 macOS Desktop Application (Beta)
+## macOS Desktop Application (Beta)
 
 A **macOS desktop version** of the IP Pinger Tool is currently under development — built using **Swift** for a native and optimized user experience.
 
