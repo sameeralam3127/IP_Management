@@ -226,13 +226,6 @@ View detailed runtime logs in **`auto_ping.log`** for debugging.
 
 ---
 
-## License
-
-**MIT License**
-Free for both personal and commercial use. Attribution appreciated.
-
----
-
 ## macOS Desktop Application (Beta)
 
 A **macOS desktop version** of the IP Pinger Tool is currently under development — built using **Swift** for a native and optimized user experience.
@@ -244,6 +237,13 @@ You can **download and test the beta release** here:
 > This version is in **beta phase** and intended for **testing and feedback** only.
 > Once thoroughly tested and optimized, a **stable commercial release** will be available.
 > Your feedback during this phase is highly appreciated and will help shape the final version.
+
+## License
+
+**MIT License**
+Free for both personal and commercial use. Attribution appreciated.
+
+---
 
 ## Contact
 
