@@ -1,36 +1,55 @@
-# IP Pinger Tool - Advanced Network Monitoring
+# IP Pinger Tool – Automated Network Scanner & Monitor
 
-![Python Version](https://img.shields.io/badge/python-3.6%2B-blue)
+![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
+![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)
+![Threads](https://img.shields.io/badge/concurrency-multithreaded-orange)
 
 ## Overview
 
-The IP Pinger Tool is a robust Python application designed for network administrators and IT professionals to efficiently monitor network devices. It provides parallel ping operations, hostname resolution, and comprehensive reporting capabilities.
+**IP Pinger Tool** is an advanced, automated network monitoring and diagnostics utility built in Python.
+It’s designed for **network administrators, IT engineers, and DevOps professionals** who need to monitor device availability, detect outages, and analyze latency at scale.
 
-## ✨ Features
+This enhanced version supports:
 
-- **Parallel Processing**: Ping hundreds of IPs simultaneously
-- **Detailed Reporting**: Get latency metrics and status reports
-- **Multiple Output Formats**: Export results in Excel, CSV, or JSON
-- **Smart Retry Mechanism**: Configurable retries for flaky connections
-- **Hostname Resolution**: Automatically resolves hostnames
-- **Colorful Console Output**: Easy-to-read status information
-- **Comprehensive Logging**: Detailed operation logs for debugging
+- **Subnet auto-discovery**,
+- **Automated Excel creation**,
+- **Interval-based periodic scans**, and
+- **Multi-format result export** — all while maintaining high performance through parallel execution.
+
+---
+
+## Features
+
+- **Parallel Processing** – Ping hundreds of IPs simultaneously with `ThreadPoolExecutor`
+- **Smart Retry Mechanism** – Reattempt unreachable IPs automatically
+- **Auto Subnet Discovery** – Scan your entire `/24` subnet without input files
+- **Automatic Input File Creation** – Creates `ip_list.xlsx` if not found
+- **Comprehensive Reporting** – Summary by status, latency, and success rate
+- **Multi-Format Export** – Save results in `Excel`, `CSV`, or `JSON`
+- **Colorized CLI Output** – Clear visibility with `colorama`
+- **Scheduled Scans** – Periodically run pings using `--interval` mode
+- **Hostname Resolution** – Reverse DNS lookup for devices
+- **Cross-Platform Compatibility** – Works seamlessly on **Windows** and **Linux**
+
+---
 
 ## Installation
 
-1. Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/sameeralam3127/IP_Management.git
 cd IP_Management
 ```
 
-2. Install dependencies:
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+
+---
 
 ## Usage
 
@@ -40,214 +59,183 @@ pip install -r requirements.txt
 python ip_pinger.py
 ```
 
+If no input file is found, the tool will automatically create a sample `ip_list.xlsx`.
+
+---
+
 ### Advanced Options
 
-| Parameter   | Description                    | Default      |
-| ----------- | ------------------------------ | ------------ |
-| `--input`   | Input Excel file path          | ip_list.xlsx |
-| `--output`  | Output file base name          | ping_results |
-| `--timeout` | Ping timeout in seconds        | 2            |
-| `--count`   | Number of ping packets         | 1            |
-| `--retries` | Number of ping retries         | 1            |
-| `--threads` | Max concurrent threads         | 50           |
-| `--formats` | Output formats (xlsx,csv,json) | xlsx         |
+| Parameter    | Description                            | Default        |
+| ------------ | -------------------------------------- | -------------- |
+| `--input`    | Input Excel file path                  | `ip_list.xlsx` |
+| `--output`   | Output file base name                  | `ping_results` |
+| `--timeout`  | Ping timeout in seconds                | `2`            |
+| `--count`    | Number of ping packets per IP          | `1`            |
+| `--retries`  | Number of retries per IP               | `1`            |
+| `--threads`  | Max concurrent threads                 | `50`           |
+| `--formats`  | Output formats (`xlsx`, `csv`, `json`) | `xlsx`         |
+| `--discover` | Auto-discover local subnet IPs         | `False`        |
+| `--interval` | Repeat scan every N minutes            | None           |
+| `--verbose`  | Enable detailed debug logging          | Off            |
 
-Example:
+---
+
+### Example: Custom Configuration
 
 ```bash
-python ip_pinger.py --input network_devices.xlsx --output scan_results --timeout 3 --count 2 --retries 2 --threads 100 --formats xlsx csv
+python ip_pinger.py \
+  --input network_devices.xlsx \
+  --output scan_results \
+  --timeout 3 \
+  --count 2 \
+  --retries 2 \
+  --threads 100 \
+  --formats xlsx csv json
 ```
 
-## Sample Report Output
+### Example: Auto Subnet Discovery
+
+```bash
+python ip_pinger.py --discover --threads 200
+```
+
+### Example: Periodic Pinging (every 10 minutes)
+
+```bash
+python ip_pinger.py --input ip_list.xlsx --interval 10
+```
+
+---
+
+## Sample Output Report
 
 ```
-=== Ping Results Summary ===
-Total IPs: 150
+=== Network Ping Summary ===
 Active: 132
 Inactive: 12
 Unreachable: 4
-Timeouts: 2
-Avg Latency (ms): 24.57
-Unresolvable Hosts: 8
+Timeout: 2
+Total: 150
 Success Rate: 88.00%
 ```
+
+---
 
 ## File Structure
 
 ```
 ip-pinger/
-├── ip_pinger.py       # Main application code
-├── requirements.txt   # Dependency list
-├── ip_pinger.log      # Generated log file
-├── ip_list.xlsx       # Sample input file
-└── ping_results.xlsx  # Sample output file
+├── ip_pinger.py         # Main application script
+├── requirements.txt     # Python dependencies
+├── auto_ping.log        # Runtime log file
+├── ip_list.xlsx         # Sample input (auto-generated if missing)
+└── ping_results_YYYYMMDD_HHMMSS.xlsx  # Timestamped output
 ```
 
-## **Functions Overview**
-
-### `parse_args() -> argparse.Namespace`
-
-Parses command-line arguments using Python's `argparse` module.  
-Allows the user to configure:
-
-- Input file path
-- Output file name and formats
-- Ping timeout, count, and retries
-- Maximum number of concurrent threads  
-  Returns an `argparse.Namespace` object with the parsed options.
-
 ---
+
+## Key Functions Overview
+
+### `parse_args()`
+
+Parses CLI arguments (using `argparse`) to configure ping parameters, output options, and automation flags.
 
 ### `validate_ip(ip: str) -> bool`
 
-Checks whether the given IP address is valid.  
-Uses Python’s `ipaddress` module to verify format correctness.  
-Returns `True` if valid, otherwise `False`.
+Validates IP address syntax using `ipaddress`.
 
----
+### `ping_ip(ip: str, timeout: int, count: int)`
 
-### `parse_latency(ping_output: str) -> Union[float, None]`
+Executes OS-appropriate ping command and returns `(status, latency)`.
 
-Extracts the average ping latency from the raw ping output string.  
-Handles both Windows and Linux/Unix ping output formats using regular expressions.  
-Returns:
+### `ping_ips_parallel(ip_list, timeout, count, retries, max_workers)`
 
-- `float` value representing latency in milliseconds, or
-- `None` if latency couldn't be determined.
-
----
-
-### `ping_ip(ip: str, timeout: int = 2, count: int = 1) -> Tuple[str, Union[float, None]]`
-
-Executes a single ping operation to the given IP address.  
-Automatically adjusts ping command based on the operating system.  
-Parses response to determine status and latency.
-
-Returns a tuple:
-
-- `status`: A string like `"Active"`, `"Timeout"`, `"Unreachable"`, `"Unknown Host"`, or error.
-- `latency`: Ping response time in ms, or `None` if not available.
-
----
-
-### `ping_with_retry(ip: str, timeout: int = 2, count: int = 1, retries: int = 1) -> Tuple[str, Union[float, None]]`
-
-Adds retry logic around the `ping_ip()` function.  
-Attempts to ping an IP multiple times if initial attempts fail.  
-Returns the first `"Active"` result found, or the final failed result after retries.
-
----
+Pings all IPs concurrently with progress tracking via `tqdm`.
 
 ### `resolve_hostname(ip: str) -> str`
 
-Attempts to resolve the hostname associated with the given IP address using reverse DNS lookup (`socket.gethostbyaddr`).  
-Handles errors gracefully.
+Performs reverse DNS lookup, handling errors gracefully.
 
-Returns:
+### `save_results(df, filename, formats)`
 
-- Hostname as a string if successful,
-- `"Unresolvable"` if it can't be resolved,
-- `"Error resolving"` for unexpected errors.
+Saves ping results in multiple formats — `.xlsx`, `.csv`, `.json`.
 
----
+### `generate_report(df)`
 
-### `ping_ips_parallel(ip_list: List[str], timeout: int, count: int, retries: int, max_workers: int) -> Dict[str, Tuple[str, Union[float, None]]]`
+Displays a colorized summary including latency averages and success rate.
 
-Executes ping operations for a list of IPs in parallel using a thread pool.  
-Improves efficiency by using `concurrent.futures.ThreadPoolExecutor`.  
-Displays a real-time progress bar via `tqdm`.
+### `get_local_subnet_ips()`
 
-Returns:
+Auto-discovers local subnet IPs from the host’s current interface.
 
-- A dictionary mapping each IP to a tuple `(status, latency)`.
+### `create_sample_excel(filename)`
 
----
-
-### `save_results(df: pd.DataFrame, filename: str, formats: List[str]) -> None`
-
-Saves the result DataFrame to one or more file formats:
-
-- Excel (`.xlsx`)
-- CSV (`.csv`)
-- JSON (`.json`)
-
-Handles file write operations safely and logs success or failure.
-
----
-
-### `generate_report(df: pd.DataFrame) -> None`
-
-Generates a colorful summary report of ping statistics.  
-Uses `colorama` to highlight output in the terminal.  
-Displays:
-
-- Total IPs processed
-- Count of each status (Active, Inactive, Timeout, etc.)
-- Average latency for active IPs
-- Count of unresolvable hostnames
-- Overall success rate as a percentage
-
----
+Automatically generates a sample Excel file if none is found.
 
 ### `main()`
 
-The primary driver of the script. It:
-
-1. Parses command-line arguments
-2. Reads the input Excel file
-3. Validates IPs
-4. Performs parallel ping operations
-5. Resolves hostnames
-6. Updates the DataFrame
-7. Saves results
-8. Prints a summary report
-
-Includes robust exception handling for common errors (missing files, bad IPs, etc.).
+Main execution flow — parses arguments, validates input, runs pings, resolves hostnames, saves results, and displays a summary.
 
 ---
 
 ## Input File Format
 
-Create an Excel file (`ip_list.xlsx` by default) with:
+Default: `ip_list.xlsx`
 
 | IP Address  |
 | ----------- |
 | 192.168.1.1 |
 | 10.0.0.1    |
-| ...         |
+| 8.8.8.8     |
 
-## Output File Contents
+---
 
-The output file will contain:
+## Output File Format
 
-| IP Address  | Status  | Latency | Hostname      |
-| ----------- | ------- | ------- | ------------- |
-| 192.168.1.1 | Active  | 24.5    | router1.local |
-| 10.0.0.1    | Timeout | -       | Unresolvable  |
-| ...         | ...     | ...     | ...           |
+| IP Address  | Status  | Latency | Hostname     | Timestamp           |
+| ----------- | ------- | ------- | ------------ | ------------------- |
+| 192.168.1.1 | Active  | 24.5 ms | router.local | 2025-10-12 18:40:15 |
+| 10.0.0.1    | Timeout | —       | Unresolvable | 2025-10-12 18:40:15 |
+
+---
 
 ## Troubleshooting
 
-1. **Permission Errors**:
+| Issue                    | Cause                              | Solution                                                                 |
+| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------ |
+| `Ping Command Not Found` | `ping` utility missing             | Install `iputils-ping` (Linux) or ensure `ping.exe` is in PATH (Windows) |
+| `Permission Denied`      | No write access to folder          | Run with proper permissions or change output directory                   |
+| `Hostname Unresolvable`  | DNS not reachable or no PTR record | Verify DNS or add reverse lookup entries                                 |
+| `Excel Locked`           | File open in another program       | Close file before saving new results                                     |
 
-   - Ensure write permissions in output directory
-   - Close Excel before running if outputting to xlsx
+View detailed runtime logs in **`auto_ping.log`** for debugging.
 
-2. **Ping Command Not Found**:
+---
 
-   - Verify ping utility is in system PATH
-   - On Windows, check if ICMP is allowed through firewall
+## Requirements
 
-3. **Hostname Resolution Issues**:
-   - Verify DNS server accessibility
-   - Check reverse DNS records exist for your IPs
+- **Python 3.8+**
+- Libraries:
 
-View detailed logs in `ip_pinger.log` for debugging.
+  ```bash
+  pandas
+  tqdm
+  colorama
+  openpyxl
+  ```
+
+---
 
 ## License
 
-MIT License - Free for commercial and personal use
+**MIT License**
+Free for both personal and commercial use. Attribution appreciated.
+
+---
 
 ## Contact
 
-For support or feature requests, please open a GitHub issue.
+**Author:** [Sameer Alam](https://github.com/sameeralam3127)
+For issues or feature requests, open a GitHub issue in the repository.
+
+> Made with ❤️ and Python 🐍 by [Sameer Alam](https://github.com/sameeralam3127)
