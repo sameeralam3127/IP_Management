@@ -233,6 +233,18 @@ Free for both personal and commercial use. Attribution appreciated.
 
 ---
 
+## 🧪 macOS Desktop Application (Beta)
+
+A **macOS desktop version** of the IP Pinger Tool is currently under development — built using **Swift** for a native and optimized user experience.
+
+You can **download and test the beta release** here:
+[macOS Beta Release – Download & Test](https://github.com/sameeralam3127/IP_Management/releases/tag/macOS)
+
+> ⚠️ **Admin Note:**
+> This version is in **beta phase** and intended for **testing and feedback** only.
+> Once thoroughly tested and optimized, a **stable commercial release** will be available.
+> Your feedback during this phase is highly appreciated and will help shape the final version.
+
 ## Contact
 
 **Author:** [Sameer Alam](https://github.com/sameeralam3127)
