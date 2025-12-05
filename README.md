@@ -98,7 +98,7 @@ Runs every 5 minutes.
 
 ---
 
-# 📥 Installation
+# Installation
 
 ## Option 1 — Install via uv (recommended)
 
@@ -310,7 +310,7 @@ Example:
 
 ---
 
-# 🛠 Troubleshooting
+# Troubleshooting
 
 ### **Command not found: ipmg**
 
@@ -349,10 +349,5 @@ Download Beta:
 MIT License — free for commercial and personal use.
 
 ---
-
-# Author
-
-**Sameer Alam**
-GitHub: [https://github.com/sameeralam3127](https://github.com/sameeralam3127)
 
 Made with ❤️ using Python & uv.
