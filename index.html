@@ -7,7 +7,7 @@
       name="description"
       content="Modern IP Pinger Tool with real-time network diagnostics"
     />
-    <title>PingMaster | Modern IP Pinger Tool</title>
+    <title>PingMonitorApp | Modern IP Pinger Tool</title>
     <link rel="icon" type="image/x-icon" href="/static/favicon.ico" />
 
     <!-- Tailwind CSS -->
@@ -190,7 +190,7 @@
             >
               <i data-feather="activity" class="text-white w-4 h-4"></i>
             </div>
-            <span class="text-xl font-bold gradient-text">PingMaster</span>
+            <span class="text-xl font-bold gradient-text">PingMonitorApp</span>
           </div>
 
           <!-- Desktop Navigation -->
@@ -296,7 +296,7 @@
               Made Simple
             </h1>
             <p class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg">
-              PingMaster provides powerful yet easy-to-use tools for network
+              PingMonitorApp provides powerful yet easy-to-use tools for network
               analysis, latency testing, and connectivity troubleshooting.
             </p>
             <div
@@ -330,54 +330,34 @@
                   <div
                     class="flex-1 text-center text-sm font-mono text-gray-500 dark:text-gray-400"
                   >
-                    pingmaster --host example.com
+                    ipmg --discover
                   </div>
                 </div>
                 <div class="p-6 font-mono text-sm">
                   <div class="text-green-500 mb-2">
-                    PING example.com (93.184.216.34): 56 data bytes
+                    [INFO] Discovered 254 hosts in local subnet.
                   </div>
                   <div class="space-y-1">
                     <div class="flex items-center">
                       <span class="text-gray-500 dark:text-gray-400 mr-2"
-                        >64 bytes from 93.184.216.34:</span
+                        >[INFO] Starting pinging...</span
                       >
-                      <span class="text-primary-500">icmp_seq=0</span>
-                      <span class="ml-2 text-gray-500 dark:text-gray-400"
-                        >ttl=56</span
-                      >
-                      <span class="ml-2 text-purple-500">time=24.586 ms</span>
                     </div>
                     <div class="flex items-center">
                       <span class="text-gray-500 dark:text-gray-400 mr-2"
-                        >64 bytes from 93.184.216.34:</span
+                        >100%|███████████████████████████████████████████████████████| 254/254</span
                       >
-                      <span class="text-primary-500">icmp_seq=1</span>
-                      <span class="ml-2 text-gray-500 dark:text-gray-400"
-                        >ttl=56</span
-                      >
-                      <span class="ml-2 text-purple-500">time=26.342 ms</span>
                     </div>
                     <div class="flex items-center">
                       <span class="text-gray-500 dark:text-gray-400 mr-2"
-                        >64 bytes from 93.184.216.34:</span
-                      >
-                      <span class="text-primary-500">icmp_seq=2</span>
-                      <span class="ml-2 text-gray-500 dark:text-gray-400"
-                        >ttl=56</span
-                      >
-                      <span class="ml-2 text-purple-500">time=25.891 ms</span>
+                        >=== IPMG Summary ===</span
+                      ><br>
+                      <span class="ml-2 text-purple-500">Active: 254</span>
                     </div>
                     <div class="text-gray-500 dark:text-gray-400 mt-4">
-                      --- example.com ping statistics ---
+                      Success Rate: 100.00%
                     </div>
-                    <div class="text-gray-500 dark:text-gray-400">
-                      3 packets transmitted, 3 packets received, 0.0% packet
-                      loss
-                    </div>
-                    <div class="text-purple-500">
-                      round-trip min/avg/max/stddev = 24.586/25.606/26.342/0.732
-                      ms
+                    
                     </div>
                   </div>
                 </div>
@@ -807,7 +787,7 @@
         <div class="text-center mb-16" data-aos="fade-up">
           <h2 class="text-3xl md:text-4xl font-bold mb-4">Documentation</h2>
           <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Comprehensive guides and references for using PingMaster
+            Comprehensive guides and references for using PingMonitorApp
           </p>
         </div>
 
@@ -835,25 +815,20 @@
                     class="code-block bg-gray-50 dark:bg-dark-800 rounded-lg p-4 font-mono text-sm mb-3"
                   >
                     <div class="text-gray-500 dark:text-gray-400">
-                      # Basic ping
+                      # IPMG - IP Management & Ping Monitoring Tool
+                      -h, --help            show this help message and exit
                     </div>
                     <div class="text-gray-800 dark:text-gray-100">
-                      pingmaster google.com
+                      ipmg --help
                     </div>
                     <div class="text-gray-500 dark:text-gray-400 mt-3">
                       # Advanced options
                     </div>
                     <div class="text-gray-800 dark:text-gray-100">
-                      pingmaster --host google.com --count 10 --interval 0.5
-                      --timeout 2 --size 64
+                      ipmg --input 
                     </div>
                   </div>
-                  <button
-                    class="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center"
-                  >
-                    <i data-feather="copy" class="w-3 h-3 mr-1"></i>
-                    Copy Command
-                  </button>
+                 
                 </div>
 
                 <div class="mb-6">
@@ -1008,7 +983,7 @@
                       class="flex items-center justify-between w-full text-left"
                     >
                       <span class="font-medium text-gray-800 dark:text-gray-200"
-                        >What is PingMaster?</span
+                        >What is PingMonitorApp?</span
                       >
                       <i
                         data-feather="chevron-down"
@@ -1016,7 +991,7 @@
                       ></i>
                     </button>
                     <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                      PingMaster is a modern network diagnostic tool that
+                      PingMonitorApp is a modern network diagnostic tool that
                       provides comprehensive ping functionality with advanced
                       statistics, visualizations, and user-friendly interfaces.
                     </div>
@@ -1030,7 +1005,7 @@
                       class="flex items-center justify-between w-full text-left"
                     >
                       <span class="font-medium text-gray-800 dark:text-gray-200"
-                        >Is PingMaster free to use?</span
+                        >Is PingMonitorApp free to use?</span
                       >
                       <i
                         data-feather="chevron-down"
@@ -1038,7 +1013,7 @@
                       ></i>
                     </button>
                     <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                      Yes, PingMaster is completely free and open-source. You
+                      Yes, PingMonitorApp is completely free and open-source. You
                       can use it for personal or commercial projects without any
                       restrictions.
                     </div>
@@ -1060,7 +1035,7 @@
                       ></i>
                     </button>
                     <div class="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                      PingMaster runs on macOS, Windows, and Linux.
+                      PingMonitorApp runs on macOS, Windows, and Linux.
                     </div>
                   </div>
 
@@ -1134,7 +1109,7 @@
               >
                 <i data-feather="activity" class="text-white w-4 h-4"></i>
               </div>
-              <span class="text-xl font-bold text-white">PingMaster</span>
+              <span class="text-xl font-bold text-white">PingMonitorApp</span>
             </div>
             <p class="mb-4">
               Powerful network diagnostics made simple for developers and IT
@@ -1216,7 +1191,7 @@
           class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center"
         >
           <div class="mb-4 md:mb-0">
-            <p>&copy; 2025 PingMaster. All rights reserved.</p>
+            <p>&copy; 2025 PingMonitorApp. All rights reserved.</p>
           </div>
           <div class="flex space-x-6">
             <a href="#" class="hover:text-white transition-colors"
