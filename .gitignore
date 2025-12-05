@@ -71,3 +71,5 @@ ping_results_*
 # ---------------------------------------
 .cache/
 .pre-commit-config.yaml~
+
+src/ipmg.egg-info
