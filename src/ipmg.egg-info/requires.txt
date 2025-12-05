@@ -1,9 +1,0 @@
-pandas
-tqdm
-colorama
-openpyxl
-
-[dev]
-pytest
-black
-ruff
