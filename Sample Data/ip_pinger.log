@@ -1,8 +1,0 @@
-2025-05-31 16:54:19,261 - INFO - Reading input file: ip_list.xlsx
-2025-05-31 16:54:19,308 - INFO - Pinging 5 IPs (timeout: 2s, count: 1, retries: 1)
-2025-05-31 16:54:20,327 - INFO - Resolving hostnames...
-2025-05-31 16:54:20,400 - INFO - Saved results to ping_results.xlsx
-2025-08-31 17:23:07,012 - INFO - Reading input file: ip_list.xlsx
-2025-08-31 17:23:07,075 - INFO - Pinging 5 IPs (timeout: 2s, count: 1, retries: 1)
-2025-08-31 17:23:08,093 - INFO - Resolving hostnames...
-2025-08-31 17:23:08,163 - INFO - Saved results to ping_results.xlsx
