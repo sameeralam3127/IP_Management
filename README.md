@@ -1,186 +1,298 @@
-# IP Pinger Tool – Automated Network Scanner & Monitor
+# IPMG — IP Management & Ping Monitoring Tool
 
-![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Linux-lightgrey)
-![Threads](https://img.shields.io/badge/concurrency-multithreaded-orange)
-
-## Overview
-
-**IP Pinger Tool** is an advanced, automated network monitoring and diagnostics utility built in Python.
-It’s designed for **network administrators, IT engineers, and DevOps professionals** who need to monitor device availability, detect outages, and analyze latency at scale.
-
-This enhanced version supports:
-
-- **Subnet auto-discovery**,
-- **Automated Excel creation**,
-- **Interval-based periodic scans**, and
-- **Multi-format result export** — all while maintaining high performance through parallel execution.
+![Platform](https://img.shields.io/badge/platform-Mac%20%7C%20Linux%20%7C%20Windows-lightgrey)
+![CLI](https://img.shields.io/badge/tool-ipmg-orange)
+![CI Ready](https://img.shields.io/badge/formatting-ruff%20%7C%20black-yellow)
+![Tests](https://img.shields.io/badge/tests-pytest-brightgreen)
 
 ---
 
-## Features
+**IPMG (IP Management Tool)** is a modern, modular, enterprise-ready network scanner and monitoring utility.
+It replaces the legacy `ip_pinger.py` script with a **clean package architecture**, CLI tooling, and automated workflows.
 
-- **Parallel Processing** – Ping hundreds of IPs simultaneously with `ThreadPoolExecutor`
-- **Smart Retry Mechanism** – Reattempt unreachable IPs automatically
-- **Auto Subnet Discovery** – Scan your entire `/24` subnet without input files
-- **Automatic Input File Creation** – Creates `ip_list.xlsx` if not found
-- **Comprehensive Reporting** – Summary by status, latency, and success rate
-- **Multi-Format Export** – Save results in `Excel`, `CSV`, or `JSON`
-- **Colorized CLI Output** – Clear visibility with `colorama`
-- **Scheduled Scans** – Periodically run pings using `--interval` mode
-- **Hostname Resolution** – Reverse DNS lookup for devices
-- **Cross-Platform Compatibility** – Works seamlessly on **Windows** and **Linux**
+Designed for:
+
+- Network administrators
+- Systems engineers
+- Cybersecurity teams
+- DevOps and SREs
+
+IPMG supports:
+
+- **Subnet auto-discovery**
+- **Parallel pinging with thread pools**
+- **Hostname resolution**
+- **Multi-format reporting (XLSX/CSV/JSON)**
+- **Scheduled recurrent scans**
+- **Auto-generated sample Excel input**
+- **Colorized CLI output**
+- **Modular testable architecture**
 
 ---
 
-## Installation
+## ⚠️ Security Disclaimer
 
-### 1. Clone the repository
+> **Do NOT use this tool on networks without explicit authorization.**
+> Always obtain written approval from your organization's **Cybersecurity / Network Security team**.
+> Unauthorized scanning may violate internal policies or law.
+
+IPMG includes a built-in disclaimer shown at runtime (`security.py`).
+
+---
+
+# Features
+
+### ✔ Modular Python package (`src/ipmg`)
+
+Not a single script anymore — now a clean, testable package.
+
+### ✔ CLI Command: `ipmg`
+
+Installed system-wide or via uv.
+
+### ✔ Auto Subnet Discovery
+
+Scan your `/24` instantly:
+
+```
+ipmg --discover
+```
+
+### ✔ Multi-threaded high performance
+
+Scans hundreds of hosts in seconds.
+
+### ✔ Auto Sample Excel Generation
+
+If the input file is missing:
+
+```
+ip_list.xlsx
+```
+
+is created automatically.
+
+### ✔ Supports multiple output formats
+
+```
+--formats xlsx csv json
+```
+
+### ✔ Hostname resolution
+
+```
+--resolve
+```
+
+### ✔ Scheduled scanning
+
+```
+--interval 5
+```
+
+Runs every 5 minutes.
+
+### ✔ Fully tested (pytest) + formatted (ruff/black)
+
+---
+
+# 📥 Installation
+
+## Option 1 — Install via uv (recommended)
+
+```
+uv tool install git+https://github.com/sameeralam3127/IP_Management.git
+```
+
+Test:
+
+```
+ipmg --help
+```
+
+---
+
+## Option 2 — Install via pip (editable, dev mode)
 
 ```bash
 git clone https://github.com/sameeralam3127/IP_Management.git
 cd IP_Management
+
+pip install -e .
 ```
 
-### 2. Install dependencies
+Now:
 
-```bash
-pip install -r requirements.txt
 ```
-
----
-
-## Usage
-
-### Basic Command
-
-```bash
-python ip_pinger.py
-```
-
-If no input file is found, the tool will automatically create a sample `ip_list.xlsx`.
-
----
-
-### Advanced Options
-
-| Parameter    | Description                            | Default        |
-| ------------ | -------------------------------------- | -------------- |
-| `--input`    | Input Excel file path                  | `ip_list.xlsx` |
-| `--output`   | Output file base name                  | `ping_results` |
-| `--timeout`  | Ping timeout in seconds                | `2`            |
-| `--count`    | Number of ping packets per IP          | `1`            |
-| `--retries`  | Number of retries per IP               | `1`            |
-| `--threads`  | Max concurrent threads                 | `50`           |
-| `--formats`  | Output formats (`xlsx`, `csv`, `json`) | `xlsx`         |
-| `--discover` | Auto-discover local subnet IPs         | `False`        |
-| `--interval` | Repeat scan every N minutes            | None           |
-| `--verbose`  | Enable detailed debug logging          | Off            |
-
----
-
-### Example: Custom Configuration
-
-```bash
-python ip_pinger.py \
-  --input network_devices.xlsx \
-  --output scan_results \
-  --timeout 3 \
-  --count 2 \
-  --retries 2 \
-  --threads 100 \
-  --formats xlsx csv json
-```
-
-### Example: Auto Subnet Discovery
-
-```bash
-python ip_pinger.py --discover --threads 200
-```
-
-### Example: Periodic Pinging (every 10 minutes)
-
-```bash
-python ip_pinger.py --input ip_list.xlsx --interval 10
+ipmg --help
 ```
 
 ---
 
-## Sample Output Report
+## Option 3 — Install using curl installer
+
+```bash
+curl -sSL https://raw.githubusercontent.com/sameeralam3127/IP_Management/main/install.sh | bash
+```
+
+This script:
+
+- Installs uv if missing
+- Installs ipmg globally into uv
+
+---
+
+# Usage
+
+### Help
 
 ```
-=== Network Ping Summary ===
+ipmg --help
+```
+
+---
+
+## Basic Example (using default input)
+
+```
+ipmg
+```
+
+If `ip_list.xlsx` does not exist → it will be created with sample IPs.
+
+---
+
+## Scan a custom input file
+
+```
+ipmg --input network_devices.xlsx
+```
+
+---
+
+## Auto-discover LAN subnet
+
+```
+ipmg --discover
+```
+
+---
+
+## Export results to CSV + XLSX
+
+```
+ipmg --formats csv xlsx
+```
+
+---
+
+## Resolve hostnames (PTR)
+
+```
+ipmg --resolve
+```
+
+---
+
+## Run every 10 minutes
+
+```
+ipmg --interval 10
+```
+
+---
+
+# File Structure (Modular Architecture)
+
+```
+IP_Management/
+├── install.sh
+├── pyproject.toml
+├── src/
+│   └── ipmg/
+│       ├── cli.py
+│       ├── ping.py
+│       ├── discover.py
+│       ├── io_handlers.py
+│       ├── reporting.py
+│       ├── utils.py
+│       ├── security.py
+│       └── __init__.py
+└── tests/
+    ├── test_ping.py
+    ├── test_utils.py
+    └── test_discover.py
+```
+
+---
+
+# Testing
+
+Run all tests:
+
+```
+uv run pytest
+```
+
+---
+
+# Formatting & Linting
+
+### Ruff (lint + autofix)
+
+```
+uv run ruff check . --fix
+```
+
+### Ruff formatter (PEP-style formatting)
+
+```
+uv run ruff format .
+```
+
+### Black (formatter)
+
+```
+uv run black .
+```
+
+---
+
+# Pre-commit Hooks (auto-format on commit)
+
+Install:
+
+```
+uv run pre-commit install
+```
+
+Run manually:
+
+```
+uv run pre-commit run --all-files
+```
+
+---
+
+# Sample Output Summary
+
+```
+=== IPMG Summary ===
 Active: 132
 Inactive: 12
 Unreachable: 4
 Timeout: 2
-Total: 150
+
 Success Rate: 88.00%
 ```
 
 ---
 
-## File Structure
+# Input File Format (Excel or CSV)
 
-```
-ip-pinger/
-├── ip_pinger.py         # Main application script
-├── requirements.txt     # Python dependencies
-├── auto_ping.log        # Runtime log file
-├── ip_list.xlsx         # Sample input (auto-generated if missing)
-└── ping_results_YYYYMMDD_HHMMSS.xlsx  # Timestamped output
-```
-
----
-
-## Key Functions Overview
-
-### `parse_args()`
-
-Parses CLI arguments (using `argparse`) to configure ping parameters, output options, and automation flags.
-
-### `validate_ip(ip: str) -> bool`
-
-Validates IP address syntax using `ipaddress`.
-
-### `ping_ip(ip: str, timeout: int, count: int)`
-
-Executes OS-appropriate ping command and returns `(status, latency)`.
-
-### `ping_ips_parallel(ip_list, timeout, count, retries, max_workers)`
-
-Pings all IPs concurrently with progress tracking via `tqdm`.
-
-### `resolve_hostname(ip: str) -> str`
-
-Performs reverse DNS lookup, handling errors gracefully.
-
-### `save_results(df, filename, formats)`
-
-Saves ping results in multiple formats — `.xlsx`, `.csv`, `.json`.
-
-### `generate_report(df)`
-
-Displays a colorized summary including latency averages and success rate.
-
-### `get_local_subnet_ips()`
-
-Auto-discovers local subnet IPs from the host’s current interface.
-
-### `create_sample_excel(filename)`
-
-Automatically generates a sample Excel file if none is found.
-
-### `main()`
-
-Main execution flow — parses arguments, validates input, runs pings, resolves hostnames, saves results, and displays a summary.
-
----
-
-## Input File Format
-
-Default: `ip_list.xlsx`
+Example:
 
 | IP Address  |
 | ----------- |
@@ -190,64 +302,57 @@ Default: `ip_list.xlsx`
 
 ---
 
-## Output File Format
+# Output File Format
 
-| IP Address  | Status  | Latency | Hostname     | Timestamp           |
-| ----------- | ------- | ------- | ------------ | ------------------- |
-| 192.168.1.1 | Active  | 24.5 ms | router.local | 2025-10-12 18:40:15 |
-| 10.0.0.1    | Timeout | —       | Unresolvable | 2025-10-12 18:40:15 |
-
----
-
-## Troubleshooting
-
-| Issue                    | Cause                              | Solution                                                                 |
-| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------ |
-| `Ping Command Not Found` | `ping` utility missing             | Install `iputils-ping` (Linux) or ensure `ping.exe` is in PATH (Windows) |
-| `Permission Denied`      | No write access to folder          | Run with proper permissions or change output directory                   |
-| `Hostname Unresolvable`  | DNS not reachable or no PTR record | Verify DNS or add reverse lookup entries                                 |
-| `Excel Locked`           | File open in another program       | Close file before saving new results                                     |
-
-View detailed runtime logs in **`auto_ping.log`** for debugging.
+| IP Address | Status | Latency | Hostname   | Timestamp           |
+| ---------- | ------ | ------- | ---------- | ------------------- |
+| 8.8.8.8    | Active | 12.5 ms | dns.google | 2025-10-12 18:40:15 |
 
 ---
 
-## Requirements
+# 🛠 Troubleshooting
 
-- **Python 3.8+**
-- Libraries:
+### **Command not found: ipmg**
 
-  ```bash
-  pandas
-  tqdm
-  colorama
-  openpyxl
-  ```
+Solution:
 
----
+```
+pip install -e .
+```
 
-## macOS Desktop Application (Beta)
+### **Permission denied output folder**
 
-A **macOS desktop version** of the IP Pinger Tool is currently under development — built using **Swift** for a native and optimized user experience.
+Run inside a writeable directory or use:
 
-You can **download and test the beta release** here:
-[macOS Beta Release – Download & Test](https://github.com/sameeralam3127/IP_Management/releases/tag/macOS)
+```
+sudo ipmg ...
+```
 
-> [!IMPORTANT]  
-> This version is in **beta phase** and intended for **testing and feedback** only.
-> Once thoroughly tested and optimized, a **stable commercial release** will be available.
-> Your feedback during this phase is highly appreciated and will help shape the final version.
+### **Hostname Unresolvable**
 
-## License
-
-**MIT License**
-Free for both personal and commercial use. Attribution appreciated.
+Likely missing DNS PTR records.
 
 ---
 
-## Contact
+# macOS GUI (PingMonitorApp – Beta)
 
-**Author:** [Sameer Alam](https://github.com/sameeralam3127)
-For issues or feature requests, open a GitHub issue in the repository.
+A native macOS interface for IPMG is under active development.
 
-> Made with ❤️ and Python 🐍 by [Sameer Alam](https://github.com/sameeralam3127)
+Download Beta:
+
+👉 [https://github.com/sameeralam3127/IP_Management/releases/tag/macOS](https://github.com/sameeralam3127/IP_Management/releases/tag/macOS)
+
+---
+
+# License
+
+MIT License — free for commercial and personal use.
+
+---
+
+# Author
+
+**Sameer Alam**
+GitHub: [https://github.com/sameeralam3127](https://github.com/sameeralam3127)
+
+Made with ❤️ using Python & uv.
