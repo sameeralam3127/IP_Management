@@ -1,0 +1,73 @@
+# ---------------------------------------
+# Python Build Artifacts
+# ---------------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pkl
+
+# ---------------------------------------
+# Virtual Environment / Tooling
+# ---------------------------------------
+.venv/
+env/
+venv/
+.uv/
+uv.lock
+
+# ignore uv tool environment cache
+.uv-cache/
+.uv/
+
+# ---------------------------------------
+# Logs & Runtime Files
+# ---------------------------------------
+*.log
+*.out
+*.err
+auto_ping.log
+ipmg.log
+
+# ---------------------------------------
+# Excel / CSV / JSON Output Files
+# ---------------------------------------
+*.xlsx
+*.xls
+*.csv
+*.json
+
+# But allow sample Excel in repo if needed:
+# !Sample Data/
+# !sample_input_template.xlsx
+
+# ---------------------------------------
+# Results From Tool
+# ---------------------------------------
+results_*.xlsx
+results_*.csv
+results_*.json
+ping_results_*
+*_results_*.xlsx
+
+# ---------------------------------------
+# macOS File System Junk
+# ---------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ---------------------------------------
+# Editors / IDE
+# ---------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ---------------------------------------
+# Pre-commit cache
+# ---------------------------------------
+.cache/
+.pre-commit-config.yaml~
